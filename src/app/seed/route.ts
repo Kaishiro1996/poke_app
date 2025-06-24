@@ -67,15 +67,15 @@ const seedTeams = async () => {
 
 
 export async function GET() {
-    try{
-        const result = await sql.begin(async () => {
-            await seedPokemon();
-            await seedUsers();
-            await seedTeams();
-          });
-          console.log("result",result); // O hacer algo útil con él
-        return Response.json({ message: 'Database seeded successfully' });
+    try {
+      await sql.begin(async () => {
+        await seedPokemon();
+        await seedUsers();
+        await seedTeams();
+      });
+  
+      return Response.json({ message: 'Database seeded successfully' });
     } catch (error) {
       return Response.json({ error }, { status: 500 });
     }
-}
+  }
