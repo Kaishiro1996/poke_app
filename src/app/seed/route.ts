@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { pokemon } from '../lib/placeholder_data';
+import { pokemon, users } from '../lib/placeholder_data';
 
 const sql = postgres(process.env.DATABASE_URL_UNPOOLED!, { ssl: 'require' });
 
@@ -27,23 +27,23 @@ async function seedPokemon() {
     return insertedPokemon
 }
 
-// async function seedUsers() {
-//     await sql`CREATE TABLE IF NOT EXISTS users (
-//         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-//         name TEXT NOT NULL,
-//         email TEXT NOT NULL,
-//         password TEXT NOT NULL
-//     )`;
-//     const insertedUsers = await Promise.all(
-//       users.map(
-//         (u) =>
-//           sql`INSERT INTO users (id, name, email, password) VALUES (${
-//             u.id
-//           }, ${u.name}, ${u.email}, ${u.password}) ON CONFLICT (id) DO NOTHING RETURNING *`
-//       )
-//     );
-//     return insertedUsers
-// }
+async function seedUsers() {
+    await sql`CREATE TABLE IF NOT EXISTS users (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL
+    )`;
+    const insertedUsers = await Promise.all(
+      users.map(
+        (u) =>
+          sql`INSERT INTO users (id, name, email, password) VALUES (${
+            u.id
+          }, ${u.name}, ${u.email}, ${u.password}) ON CONFLICT (id) DO NOTHING RETURNING *`
+      )
+    );
+    return insertedUsers
+}
 
 // async function seedTeams() {
 //     sql`CREATE TABLE IF NOT EXISTS teams (
@@ -70,7 +70,7 @@ export async function GET() {
     try {
      const result = await sql.begin(() => [
         seedPokemon(),
-        // seedUsers(),
+        seedUsers(),
         // seedTeams()
       ]);
       console.log('Seeding completed successfully:', result);
