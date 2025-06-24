@@ -66,7 +66,7 @@ async function seedPokemon() {
 // };
 
 
-export async function seed() {
+export async function GET() {
     try {
      const result = await sql.begin(() => [
         seedPokemon(),
