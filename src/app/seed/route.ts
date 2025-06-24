@@ -27,51 +27,51 @@ async function seedPokemon() {
     return insertedPokemon
 }
 
-async function seedUsers() {
-    await sql`CREATE TABLE IF NOT EXISTS users (
-        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        password TEXT NOT NULL
-    )`;
-    const insertedUsers = await Promise.all(
-      users.map(
-        (u) =>
-          sql`INSERT INTO users (id, name, email, password) VALUES (${
-            u.id
-          }, ${u.name}, ${u.email}, ${u.password}) ON CONFLICT (id) DO NOTHING RETURNING *`
-      )
-    );
-    return insertedUsers
-}
+// async function seedUsers() {
+//     await sql`CREATE TABLE IF NOT EXISTS users (
+//         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+//         name TEXT NOT NULL,
+//         email TEXT NOT NULL,
+//         password TEXT NOT NULL
+//     )`;
+//     const insertedUsers = await Promise.all(
+//       users.map(
+//         (u) =>
+//           sql`INSERT INTO users (id, name, email, password) VALUES (${
+//             u.id
+//           }, ${u.name}, ${u.email}, ${u.password}) ON CONFLICT (id) DO NOTHING RETURNING *`
+//       )
+//     );
+//     return insertedUsers
+// }
 
-async function seedTeams() {
-    sql`CREATE TABLE IF NOT EXISTS teams (
-        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-        name TEXT NOT NULL,
-        pokemon JSONB NOT NULL,
-        user_id UUID REFERENCES users(id) ON DELETE CASCADE
-    )`;
-    const insertedTeams = await Promise.all(
-      teams.map(
-        (t) =>
-          sql`INSERT INTO teams (id, name, pokemon, user_id) VALUES (${
-            t.user_id
-          }, ${t.name}, ${JSON.stringify(t.pokemon)}, ${
-            t.user_id
-          }) ON CONFLICT (id) DO NOTHING RETURNING *`
-      )
-    )
-    return insertedTeams
-};
+// async function seedTeams() {
+//     sql`CREATE TABLE IF NOT EXISTS teams (
+//         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+//         name TEXT NOT NULL,
+//         pokemon JSONB NOT NULL,
+//         user_id UUID REFERENCES users(id) ON DELETE CASCADE
+//     )`;
+//     const insertedTeams = await Promise.all(
+//       teams.map(
+//         (t) =>
+//           sql`INSERT INTO teams (id, name, pokemon, user_id) VALUES (${
+//             t.user_id
+//           }, ${t.name}, ${JSON.stringify(t.pokemon)}, ${
+//             t.user_id
+//           }) ON CONFLICT (id) DO NOTHING RETURNING *`
+//       )
+//     )
+//     return insertedTeams
+// };
 
 
 export async function seed() {
     try {
      const result = await sql.begin(() => [
         seedPokemon(),
-        seedUsers(),
-        seedTeams()
+        // seedUsers(),
+        // seedTeams()
       ]);
       console.log('Seeding completed successfully:', result);
       return Response.json({
