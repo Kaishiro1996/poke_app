@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { pokemon, teams, users } from '../lib/placeholder_data';
+import { pokemon } from '../lib/placeholder_data';
 
 const sql = postgres(process.env.DATABASE_URL_UNPOOLED!, { ssl: 'require' });
 
