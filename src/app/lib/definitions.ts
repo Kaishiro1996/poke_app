@@ -8,6 +8,7 @@ export type Pokemon = {
 };
 
 export type Team = {
+  id: string;
   name: string;
   pokemon: Pokemon[];
 };

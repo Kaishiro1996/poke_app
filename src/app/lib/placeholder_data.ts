@@ -18,7 +18,8 @@ const pokemon = [
 ];
 
 const teams = [
-    {
+    {   
+        id: "1",
         name: "Team Rocket",
         pokemon: ["1", "2"], // Add more Pokemon objects as needed
         user_id: "1", // Reference to the user ID
