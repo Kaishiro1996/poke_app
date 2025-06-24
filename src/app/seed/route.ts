@@ -45,7 +45,7 @@ async function seedUsers() {
     return insertedUsers
 }
 
-const insertedTeams = async () => {
+const seedTeams = async () => {
     sql`CREATE TABLE IF NOT EXISTS teams (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name TEXT NOT NULL,
@@ -64,3 +64,17 @@ const insertedTeams = async () => {
     )
     return insertedTeams
 };
+
+
+export async function GET() {
+    try{
+        const result = await sql.begin((sql) => {
+            seedPokemon(),
+            seedUsers(),
+            seedTeams()
+        });
+        return Response.json({ message: 'Database seeded successfully' });
+    } catch (error) {
+      return Response.json({ error }, { status: 500 });
+    }
+}
