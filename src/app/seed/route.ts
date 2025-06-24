@@ -66,16 +66,15 @@ const seedTeams = async () => {
 };
 
 
-export async function GET() {
+export async function seed() {
     try {
-      await sql.begin(async () => {
         await seedPokemon();
         await seedUsers();
         await seedTeams();
-      });
-  
-      return Response.json({ message: 'Database seeded successfully' });
+        console.log('Seeding completed successfully');
     } catch (error) {
-      return Response.json({ error }, { status: 500 });
+        console.error('Error during seeding:', error);
+    } finally {
+        await sql.end();
     }
-  }
+}
