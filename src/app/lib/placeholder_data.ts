@@ -19,17 +19,17 @@ const pokemon = [
 
 const teams = [
     {   
-        id: "1",
+        id: 1,
         name: "Team Rocket",
         pokemon: ["1", "2"], // Add more Pokemon objects as needed
-        user_id: "1", // Reference to the user ID
+        user_id: "e54fca2d-77b5-4df6-9b36-b9a5b50a9f32", // Reference to the user ID
     },
     // Add more Team objects here
 ];
 
 const users = [
     {
-        id: "1",
+        id: "e54fca2d-77b5-4df6-9b36-b9a5b50a9f32",
         name: "Chelo",
         email: "marcelo_ema@hotmail.com",
         password: "password123",
