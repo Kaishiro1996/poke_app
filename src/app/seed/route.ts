@@ -41,11 +41,11 @@ async function seedUsers(sql: postgres.Sql) {
         password TEXT NOT NULL
     )`;
     // Insert placeholder data into the users table
-    // for (const user of users) {
-    //     await sql`INSERT INTO users (id, name, email, password)
-    //         VALUES (${user.id}, ${user.name}, ${user.email}, ${user.password})
-    //         ON CONFLICT (id) DO NOTHING`; // Prevent duplicate entries
-    // }
+    for (const user of users) {
+        await sql`INSERT INTO users (id, name, email, password)
+            VALUES (${user.id}, ${user.name}, ${user.email}, ${user.password})
+            ON CONFLICT (id) DO NOTHING`; // Prevent duplicate entries
+    }
  return "seeded users";
 }
 
@@ -63,30 +63,30 @@ async function seedTeams(sql: postgres.Sql) {
 
     )`;
     // Insert placeholder data into the teams table
-    // for (const team of teams) {
-    //   // Rellenar los campos faltantes con null si no existen
-    //   const {
-    //     id,
-    //     name,
-    //     user_id,
-    //     pokemon1 = null,
-    //     pokemon2 = null,
-    //     pokemon3 = null,
-    //     pokemon4 = null,
-    //     pokemon5 = null,
-    //     pokemon6 = null
-    //   } = team;
+    for (const team of teams) {
+      // Rellenar los campos faltantes con null si no existen
+      const {
+        id,
+        name,
+        user_id,
+        pokemon1 = null,
+        pokemon2 = null,
+        pokemon3 = null,
+        pokemon4 = null,
+        pokemon5 = null,
+        pokemon6 = null
+      } = team;
   
-    //   await sql`INSERT INTO teams (
-    //     id, name, user_id,
-    //     pokemon1, pokemon2, pokemon3,
-    //     pokemon4, pokemon5, pokemon6
-    //   ) VALUES (
-    //     ${id}, ${name}, ${user_id},
-    //     ${pokemon1}, ${pokemon2}, ${pokemon3 || null},
-    //     ${pokemon4 || null}, ${pokemon5 || null}, ${pokemon6 || null}
-    //   ) ON CONFLICT (id) DO NOTHING`;
-    // }
+      await sql`INSERT INTO teams (
+        id, name, user_id,
+        pokemon1, pokemon2, pokemon3,
+        pokemon4, pokemon5, pokemon6
+      ) VALUES (
+        ${id}, ${name}, ${user_id},
+        ${pokemon1}, ${pokemon2}, ${pokemon3 || null},
+        ${pokemon4 || null}, ${pokemon5 || null}, ${pokemon6 || null}
+      ) ON CONFLICT (id) DO NOTHING`;
+    }
   
     return 'seeded teams';
   }
