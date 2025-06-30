@@ -6,10 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:5000": "next dev --port 5000 --turbopack"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "firebase": "^11.9.1",
     "next": "15.3.4",
     "postgres": "^3.4.7",
     "react": "^19.0.0",
