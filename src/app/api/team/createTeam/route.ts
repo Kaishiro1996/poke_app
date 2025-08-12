@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     RETURNING id, name;
    `;
 
-   return NextResponse.json({ teamId: result.id }, { status: 201 });
+   return NextResponse.json({ teamId: result.id, name: result.name }, { status: 201 });
 } catch (error) {
     console.error('Error creating team:', error);
     return new Response(JSON.stringify({ error: 'Error creating team' }), { status: 500 });
