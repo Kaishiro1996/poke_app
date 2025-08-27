@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     if (!id) {
         return Response.json({ error: 'ID parameter is required' }, { status: 400 });
     }
-   const result = await sql`SELECT id FROM users
+   const result = await sql`SELECT id, name, favorite_pokemons, catched_pokemons FROM users
    WHERE FB_UID = ${id}
    `;
     return Response.json(result, { status: 200 });
