@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
             
             name,
             nickname,
-            gender,
+            
             pokedex_number,
             move1,
             move2,
