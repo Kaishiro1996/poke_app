@@ -40,7 +40,7 @@ export async function PUT(req: NextRequest) {
 
         const [result] = await sql`
         UPDATE pokemon
-        SET name = ${name}, nickname = ${nickname}, pokedex_number = ${pokedex_number}, move1 = ${move1}, move2 = ${move2}, move3 = ${move3}, move4 = ${move4}, shiny = ${shiny}, ability = ${ability},  iv_hp = ${iv_Hp}, iv_atq = ${iv_Atk}, iv_def = ${iv_Def}, iv_spa = ${iv_SpA}, iv_spd = ${iv_Spd}, iv_spe = ${iv_Spe}, ev_hp = ${ev_Hp}, ev_atq = ${ev_Atk}, ev_def = ${ev_Def}, ev_spa = ${ev_SpA}, ev_spd = ${ev_Spd}, ev_spe = ${ev_Spe}, nature = ${nature}, gender = ${realGender}, teratype = ${teratype}
+        SET name = ${name}, nickname = ${nickname}, pokedex_number = ${pokedex_number}, move1 = ${move1}, move2 = ${move2}, move3 = ${move3}, move4 = ${move4}, shiny = ${shiny}, ability = ${ability},  iv_hp = ${iv_Hp}, iv_atq = ${iv_Atk}, iv_def = ${iv_Def}, iv_spa = ${iv_SpA}, iv_spd = ${iv_Spd}, iv_spe = ${iv_Spe}, ev_hp = ${ev_Hp}, ev_atq = ${ev_Atk}, ev_def = ${ev_Def}, ev_spa = ${ev_SpA}, ev_spd = ${ev_Spd}, ev_spe = ${ev_Spe}, nature = ${nature}, gender = ${realGender}, teratype = ${teratype}, item = ${body.item} 
         WHERE id = ${body.id}
         RETURNING id
 
