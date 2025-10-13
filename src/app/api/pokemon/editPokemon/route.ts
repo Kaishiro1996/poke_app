@@ -30,6 +30,12 @@ export async function PUT(req: NextRequest) {
             ev_spa,
             ev_spd,
             ev_spe,
+            stat_hp,
+            stat_atq,
+            stat_def,
+            stat_spa,
+            stat_spd,
+            stat_spe,
             nature,
             item
         } = body;
@@ -37,7 +43,7 @@ export async function PUT(req: NextRequest) {
             return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
         }
         const realGender = body.gender === true ? 'male' : 'female';
-        console.log(realGender);const [result] = await sql`
+        ;const [result] = await sql`
 UPDATE pokemon
 SET
   name = ${name || null},
@@ -61,6 +67,12 @@ SET
   ev_spa = ${ev_spa ?? 0},
   ev_spd = ${ev_spd ?? 0},
   ev_spe = ${ev_spe ?? 0},
+    stat_hp = ${stat_hp ?? 0},
+  stat_atq = ${stat_atq ?? 0},
+  stat_def = ${stat_def ?? 0},
+  stat_spa = ${stat_spa ?? 0},
+  stat_spd = ${stat_spd ?? 0},
+  stat_spe = ${stat_spe ?? 0},
   nature = ${nature || null},
   gender = ${realGender || null},
   teratype = ${teratype || null},
