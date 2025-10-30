@@ -4,7 +4,7 @@ import sql from '@/app/lib/db';
 export async function POST(req: NextRequest) {
     try{
         const body = await req.json();
-        const { name, email, password } = body;
+        const { name, email } = body;
         console.log('Creating user with body:', body);
 
         if (!name) {
@@ -13,9 +13,7 @@ export async function POST(req: NextRequest) {
         if (!email) {
             return NextResponse.json({ error: 'email is required' }, { status: 400 });
         }
-        if (!password) {
-            return NextResponse.json({ error: 'password is required' }, { status: 400 });
-        }
+       
 
         const [existingUser] = await sql`
             SELECT * FROM users WHERE email = ${email}
@@ -24,8 +22,8 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 });
         }
         const [result] = await sql`
-            INSERT INTO users (name, email, password)
-            VALUES (${name}, ${email}, ${password})
+            INSERT INTO users (name, email)
+            VALUES (${name}, ${email})
             RETURNING id, name, email;
         `;
 
