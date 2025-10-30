@@ -4,7 +4,7 @@ import sql from '@/app/lib/db';
 export async function POST(req: NextRequest) {
     try{
         const body = await req.json();
-        const { name, email } = body;
+        const { name, email, fb_uid } = body;
         console.log('Creating user with body:', body);
 
         if (!name) {
@@ -22,8 +22,8 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 });
         }
         const [result] = await sql`
-            INSERT INTO users (name, email)
-            VALUES (${name}, ${email})
+            INSERT INTO users (name, email, fb_uid, favorite_pokemons, catched_pokemons)
+            VALUES (${name}, ${email}, ${fb_uid}, '[]', '[]')
             RETURNING id, name, email;
         `;
 
