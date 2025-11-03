@@ -81,12 +81,20 @@ WHERE id = ${id}
 RETURNING id;
 `;
         return NextResponse.json({ pokemonId: result }, { status: 200 });
-    } catch (error: any) {
-  console.error('Error editing pokemon:', error?.message || error);
-  return NextResponse.json(
-    { error: error?.message || String(error) },
-    { status: 500 }
-  );
+    } catch (error: unknown) {
+  if (error instanceof Error) {
+    console.error("Error editing pokemon:", error.message);
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  } else {
+    console.error("Unknown error editing pokemon:", error);
+    return NextResponse.json(
+      { error: String(error) },
+      { status: 500 }
+    );
+  }
 }
 
 }
