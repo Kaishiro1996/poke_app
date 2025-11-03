@@ -17,7 +17,7 @@ export async function DELETE(req: NextRequest) {
 if (!result) {
   return NextResponse.json({ error: "Pokemon not found" }, { status: 404 });
 }
-        return NextResponse.json({ message: 'Pokemon deleted successfully' }, { status: 204 });
+        return NextResponse.json({ message: 'Pokemon deleted successfully' }, { status: 200 });
     } catch (error) {
         console.error('Error deleting pokemon:', error);
         return NextResponse.json({ error: 'Error deleting pokemon' }, { status: 500 });
