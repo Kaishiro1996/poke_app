@@ -83,6 +83,6 @@ RETURNING id;
         return NextResponse.json({ pokemonId: result }, { status: 200 });
     } catch (error) {
         console.error('Error adding pokemon:', error);  
-        return NextResponse.json({ error: 'Error adding pokemon' }, { status: 500 });
+        return NextResponse.json({ error: 'Error adding pokemon'+ error }, { status: 500 });
     }
 }
